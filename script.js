@@ -7,6 +7,7 @@ const makeGameBoard = (() => {
     function drawspaces() {
         for (let i = 0; i < 9; i++) {
             const space = document.createElement('div')
+            space.setAttribute('data', `${i}`)
             boardWrap.appendChild(space)
             space.addEventListener('click', spaceClicked, {once:true})
         }
@@ -19,14 +20,13 @@ const makeGameBoard = (() => {
             const xImg = document.createElement('img')
             xImg.src = 'img/x.svg'
             clickedSpace.appendChild(xImg)
-            gameboard.push('x')
+            gameboard[clickedSpace.getAttribute('data')] = 'x'
         } else if (playerTurn === false) {
             const oImg =document.createElement('img')
             oImg.src = 'img/o.svg'
             clickedSpace.appendChild(oImg)
-            gameboard.push('o')
-        }      
-        console.log('clicked')
+            gameboard[clickedSpace.getAttribute('data')] = 'o'
+        }
     }
 
     function resetGame() {
