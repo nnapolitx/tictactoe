@@ -12,12 +12,23 @@ body {
     gap: .25rem;
     background-color: black;
     width: 600px;
-    
 }
 
 .board-wrap>*{
     height: 192px;
     background-color: white;
+}
+
+.board-wrap>*{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+svg {
+    height: 96px;
+    width: 96px;
+    color: red;
 }
 
 .ui-row {

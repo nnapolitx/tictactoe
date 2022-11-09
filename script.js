@@ -8,18 +8,23 @@ const makeGameBoard = (() => {
         for (let i = 0; i < 9; i++) {
             const space = document.createElement('div')
             boardWrap.appendChild(space)
-            gameboard.push(space)
+            
             space.addEventListener('click', spaceClicked)
         }
     }
 
     function spaceClicked(e) {
         let clickedSpace = e.target
-        if (clickedSpace.style.backgroundColor === 'red') {
-            clickedSpace.style.backgroundColor = 'white'
-        } else clickedSpace.style.backgroundColor = 'red'
-
-
+        let playerTurn = gamePlay.getTurn()
+        if (playerTurn === true){
+            const xImg = document.createElement('img')
+            xImg.src = 'img/x.svg'
+            clickedSpace.appendChild(xImg)
+        } else if (playerTurn === false) {
+            const oImg =document.createElement('img')
+            oImg.src = 'img/o.svg'
+            clickedSpace.appendChild(oImg)
+        }        
     }
 
     function resetGame() {
@@ -40,4 +45,15 @@ resetBtn.addEventListener('click', makeGameBoard.resetGame)
 
 // add factory for two players
 
-//
+//gameflow object
+const gamePlay = (() => {
+    let turn=false
+
+    const getTurn = ()=>{
+        if (turn===true) turn = false
+        else turn=true
+        return turn
+    }
+
+    return {getTurn}
+})()
