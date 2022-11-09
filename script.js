@@ -8,8 +8,7 @@ const makeGameBoard = (() => {
         for (let i = 0; i < 9; i++) {
             const space = document.createElement('div')
             boardWrap.appendChild(space)
-            
-            space.addEventListener('click', spaceClicked)
+            space.addEventListener('click', spaceClicked, {once:true})
         }
     }
 
@@ -20,11 +19,14 @@ const makeGameBoard = (() => {
             const xImg = document.createElement('img')
             xImg.src = 'img/x.svg'
             clickedSpace.appendChild(xImg)
+            gameboard.push('x')
         } else if (playerTurn === false) {
             const oImg =document.createElement('img')
             oImg.src = 'img/o.svg'
             clickedSpace.appendChild(oImg)
-        }        
+            gameboard.push('o')
+        }      
+        console.log('clicked')
     }
 
     function resetGame() {
@@ -57,3 +59,9 @@ const gamePlay = (() => {
 
     return {getTurn}
 })()
+
+
+/* ------TO DO's--------
+2. have the game notice and announce a winner
+3. begin adding AI
+*/

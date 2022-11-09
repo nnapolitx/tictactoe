@@ -25,12 +25,6 @@ body {
     align-items: center;
 }
 
-svg {
-    height: 96px;
-    width: 96px;
-    color: red;
-}
-
 .ui-row {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
