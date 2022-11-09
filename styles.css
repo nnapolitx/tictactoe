@@ -1,5 +1,16 @@
+body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
 .board-wrap {
     display: grid;
-    grid-template-columns: 3;
-    grid-template-rows: 3;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    gap: .25rem;
+    background-color: #bdbcbc;
+    width: 800px;
+    border: 2px solid black;
 }
