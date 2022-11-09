@@ -2,48 +2,42 @@ let gameboard = []
 const boardWrap = document.querySelector('.board-wrap')
 const resetBtn = document.querySelector('.reset')
 
-//add a IIFE for creating gameboard
+// add a IIFE for creating gameboard
 const makeGameBoard = (() => {
     function drawspaces() {
-        if (gameboard.length === 0) {
-            for (let i = 0; i < 9; i++) {
-                const space = document.createElement('div')
-                boardWrap.appendChild(space)
-                gameboard.push(space)
-                space.addEventListener('click', spaceClicked)
-            }
+        for (let i = 0; i < 9; i++) {
+            const space = document.createElement('div')
+            boardWrap.appendChild(space)
+            gameboard.push(space)
+            space.addEventListener('click', spaceClicked)
         }
     }
-    
 
     function spaceClicked(e) {
-        console.log('click', e.target)
         let clickedSpace = e.target
-        if (clickedSpace.style.backgroundColor === 'red'){
-            clickedSpace.style.backgroundColor='white'
+        if (clickedSpace.style.backgroundColor === 'red') {
+            clickedSpace.style.backgroundColor = 'white'
         } else clickedSpace.style.backgroundColor = 'red'
-        
+
+
     }
 
     function resetGame() {
-        console.log('clicked reset')
         let child = boardWrap.lastElementChild
-        while (child){
+        while (child) {
             boardWrap.removeChild(child)
-            child=boardWrap.lastElementChild
+            child = boardWrap.lastElementChild
         }
-
-        gameboard=[]
+        gameboard = []
         drawspaces()
     }
 
     drawspaces()
-    
     return {resetGame}
 })();
 
 resetBtn.addEventListener('click', makeGameBoard.resetGame)
 
-//add factory for two players
+// add factory for two players
 
 //
