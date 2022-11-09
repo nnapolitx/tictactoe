@@ -59,14 +59,18 @@ const gamePlay = (() => {
         if (turns % 2 === 0) return true
         else return false
     }
-
-    
     return {getTurn}
 })()
 
+//TOP gives instructions to create a gameboard using an array inside of an object. Not sure how to do this
+gameObject = {
+    'row1': ['','',''],
+    'row2': ['','',''],
+    'row3': ['','','']
+}
+
 
 /* ------TO DO's--------
--consider changing turn logic
 -have the game notice and announce a winner
 -begin adding AI
 */
