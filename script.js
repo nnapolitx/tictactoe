@@ -46,22 +46,27 @@ const makeGameBoard = (() => {
 resetBtn.addEventListener('click', makeGameBoard.resetGame)
 
 // add factory for two players
+const Player = (symbol, name) => {
+    const getSymbol = () => symbol
+    const getName = () => name
+    return {getSymbol, getName}
+}
 
 //gameflow object
 const gamePlay = (() => {
-    let turn=false
-
-    const getTurn = ()=>{
-        if (turn===true) turn = false
-        else turn=true
-        return turn
+    const getTurn = () => {
+        let turns = gameboard.filter(String).length
+        if (turns % 2 === 0) return true
+        else return false
     }
 
+    
     return {getTurn}
 })()
 
 
 /* ------TO DO's--------
-2. have the game notice and announce a winner
-3. begin adding AI
+-consider changing turn logic
+-have the game notice and announce a winner
+-begin adding AI
 */
