@@ -4,19 +4,25 @@ const gameWrap = document.querySelector('.board-wrap')
 const gameboard = {
     'board':
     [
-        '_', '_', '_',
-        '_', '_', '_', 
-        '_', '_', '_'
+        '', '', '',
+        '', '', '', 
+        '', '', ''
     ]
 };
 
 const drawBoard = (() => {
+    //draw spaces based on the gameboard object
     function drawSpaces () {
-        console.log('draw')
         for (let i=0; i<gameboard.board.length; i++){
-            console.log(`draw space ${i}`)
-            
+            const space = document.createElement('div')
+            gameWrap.appendChild(space)
+            space.setAttribute('data', `${i}`)
+            space.addEventListener('click', clickedSpace, {once:true})
         }
+    }
+
+    function clickedSpace(e){
+        console.log('clicked')
     }
 
     function resetGame() {
