@@ -24,7 +24,16 @@ const drawBoard = (() => {
 
     function clickedSpace(e){
         const selectedSpace = e.target
-        console.log(selectedSpace.getAttribute('data'))
+        const index = selectedSpace.getAttribute('data')
+
+        if (gameFlow.getTurn() === true) {
+            gameboard.board.splice(index, 1, 'x')
+            selectedSpace.textContent = 'x'
+        } else if (gameFlow.getTurn() === false) {
+            gameboard.board.splice(index, 1, 'o')
+            selectedSpace.textContent = 'o'
+        }
+
     }
 
     function resetGame() {
@@ -33,17 +42,27 @@ const drawBoard = (() => {
             gameWrap.removeChild(child)
             child = gameWrap.lastElementChild
         }
+        gameboard.board = [
+            '', '', '',
+            '', '', '', 
+            '', '', ''
+        ]
         drawSpaces()
     }
 
+    //select reset button and add clickEvent for ResetGame()
+    const resetBtn = document.querySelector('.reset')
+    resetBtn.addEventListener('click', resetGame)
+
     drawSpaces()
-    return {resetGame}
 })()
 
-//select reset button and add clickEvent for ResetGame()
-const resetBtn = document.querySelector('.reset')
-resetBtn.addEventListener('click', drawBoard.resetGame)
-
 const gameFlow = (() => {
-    console.log('flow')
+    const getTurn = () => {
+        let turns = gameboard.board.filter(String).length
+        if (turns % 2 === 0) return true
+        else return false
+    }
+    
+    return {getTurn}
 })()
