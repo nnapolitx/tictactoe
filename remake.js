@@ -12,7 +12,7 @@ const gameboard = {
 
 const drawBoard = (() => {
     //draw spaces based on the gameboard object
-    function drawSpaces () {
+    const drawSpaces = () => {
         for (let i=0; i<gameboard.board.length; i++){
             const space = document.createElement('div')
             gameWrap.appendChild(space)
@@ -23,18 +23,27 @@ const drawBoard = (() => {
     }
 
     function clickedSpace(e){
-        console.log('clicked')
+        const selectedSpace = e.target
+        console.log(selectedSpace.getAttribute('data'))
     }
 
     function resetGame() {
-        let child = boardWrap.lastElementChild
+        let child = gameWrap.lastElementChild
         while (child) {
-            boardWrap.removeChild(child)
-            child = boardWrap.lastElementChild
+            gameWrap.removeChild(child)
+            child = gameWrap.lastElementChild
         }
-        drawspaces()
+        drawSpaces()
     }
 
     drawSpaces()
     return {resetGame}
+})()
+
+//select reset button and add clickEvent for ResetGame()
+const resetBtn = document.querySelector('.reset')
+resetBtn.addEventListener('click', drawBoard.resetGame)
+
+const gameFlow = (() => {
+    console.log('flow')
 })()
