@@ -16,6 +16,7 @@ const drawBoard = (() => {
         for (let i=0; i<gameboard.board.length; i++){
             const space = document.createElement('div')
             gameWrap.appendChild(space)
+            space.textContent=gameboard.board[i]
             space.setAttribute('data', `${i}`)
             space.addEventListener('click', clickedSpace, {once:true})
         }
