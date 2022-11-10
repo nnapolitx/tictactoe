@@ -59,18 +59,33 @@ const gamePlay = (() => {
         if (turns % 2 === 0) return true
         else return false
     }
-    return {getTurn}
+
+    //not sure if I should create this, then check in the player objects to see if their spaces match any of these combinations, or if I should do this another way
+    const winArray = [
+        [0, 1, 2],
+        [3, 4, 5],
+        [6, 7, 8],
+        [0, 4, 8],
+        [2, 4, 6],
+        [0, 3, 6],
+        [1, 4, 7],
+        [2, 5, 8]
+    ];
+
+    return {getTurn, winArray}
 })()
 
 //TOP gives instructions to create a gameboard using an array inside of an object. Not sure how to do this
 gameObject = {
-    'row1': ['','',''],
-    'row2': ['','',''],
-    'row3': ['','','']
-}
+    'Player1': [],
+    'Player2': []
+    }
 
 
 /* ------TO DO's--------
 -have the game notice and announce a winner
 -begin adding AI
+
+
 */
+
