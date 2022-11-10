@@ -32,3 +32,12 @@ body {
     gap: 1rem;
     margin: 8px;
 }
+
+.win-line {
+    position: absolute;
+    border: 1px solid black;
+    width: 300px;
+    margin: 0;
+    padding: 0;
+    
+}

@@ -36,7 +36,7 @@ const drawBoard = (() => {
             const space = document.createElement('div')
             gameWrap.appendChild(space)
             space.textContent=gameboard.board[i]
-            space.setAttribute('data', `${i}`)
+            space.setAttribute('data', i)
             space.addEventListener('click', clickedSpace, {once:true})
         }
     }
@@ -49,12 +49,12 @@ const drawBoard = (() => {
             gameboard.board.splice(index, 1, 'x')
             selectedSpace.textContent = 'x'
             playerOne.move(Number(index))
-            gameFlow.checkWinner(playerOne.board, playerOne.getName())
+            gameFlow.checkWinner(playerOne.board, playerOne)
         } else if (gameFlow.getTurn() === false) {
             gameboard.board.splice(index, 1, 'o')
             selectedSpace.textContent = 'o'
             playerTwo.move(Number(index))
-            gameFlow.checkWinner(playerTwo.board, playerTwo.getName())
+            gameFlow.checkWinner(playerTwo.board, playerTwo)
         }
     }
 
@@ -102,15 +102,21 @@ const gameFlow = (() => {
         h: [2, 5, 8]
     };
 
-    function win (player) {
-        console.log(`${player} WINS!`)
-        drawBoard.resetGame()
+    function win (player, arr) {
+        console.log(`${player.getName()} WINS!`)
+        const line = document.createElement('div')
+        line.classList.add('win-line')
+        const beginLine = document.querySelector(`[data="${arr[0]}"]`)
+        beginLine.appendChild(line)
+
+        //drawBoard.resetGame()
     }
 
     const checkWinner = (checkBoard, player) => {
         for (const key in winCombos) {
             if (winCombos[key].every(v => checkBoard.includes(v))){
-                win(player)
+                let arr = winCombos[key]
+                win(player, arr)
             }
         }
         if (playerOne.board.length === 5 && playerTwo.board.length === 4) {
@@ -121,3 +127,15 @@ const gameFlow = (() => {
     
     return {getTurn, checkWinner}
 })()
+
+/*To dos
+-create a line ~animation-ish thingy for the winner
+-add a user interface that:
+    -asks user to input a name and select either player 2 or computer
+    -begins the game and counts wins
+    -change reset button to 'New Match'
+    -add a reset game button that resets the page to ask the user to enter a new name
+-begin creating AI by having it pick random available squares from the gameboard Object
+-give the AI some knowledge with own logic
+-finally, have the AI become impossible with minmax() theorem
+*/
