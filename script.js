@@ -115,6 +115,7 @@ const gameFlow = (() => {
         }
         if (playerOne.board.length === 5 && playerTwo.board.length === 4) {
             console.log('it is a tie')
+            drawBoard.resetGame()
         }
     }
     
