@@ -49,12 +49,12 @@ const drawBoard = (() => {
         if (gameFlow.getTurn() === true) {
             gameboard.board.splice(index, 1, 'x')
             selectedSpace.textContent = 'x'
-            playerOne.move(index)
+            playerOne.move(Number(index))
             gameFlow.checkWinner(playerOne.board)
         } else if (gameFlow.getTurn() === false) {
             gameboard.board.splice(index, 1, 'o')
             selectedSpace.textContent = 'o'
-            playerTwo.move(index)
+            playerTwo.move(Number(index))
         }
     }
 
@@ -90,7 +90,7 @@ const gameFlow = (() => {
     }
 
     const winCombos = {
-        a: ['0', '1', '2'],
+        a: [0, 1, 2],
         b: [3, 4, 5],
         c: [6, 7, 8],
         d: [0, 4, 8],
@@ -108,9 +108,16 @@ const gameFlow = (() => {
     }
 
     const checkWinner = (chkbd) => {
-        console.log('checking winner')
-        const checker=()=> winCombos.a.every(value => chkbd.includes(value))
-        console.log(checker())
+        let winner=''
+        //const checker=()=> Object.values(winCombos).every(value => chkbd.includes(value))
+        //console.log(checker())
+
+        for (const key in winCombos) {
+            if (winCombos[key].every(v => chkbd.includes(v))){
+                winner='p1'
+                win(winner)
+            }
+        }
     }
     
     return {getTurn, checkWinner}
