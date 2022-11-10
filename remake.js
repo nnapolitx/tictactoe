@@ -7,8 +7,7 @@ const Player = (name) => {
     const board = []
 
     const resetPlayerBoard = () => {
-        console.log(`reset ${name}'s board`)
-        board = []
+        board.length=0;
     }
 
     const move = (index) => {
@@ -50,11 +49,12 @@ const drawBoard = (() => {
             gameboard.board.splice(index, 1, 'x')
             selectedSpace.textContent = 'x'
             playerOne.move(Number(index))
-            gameFlow.checkWinner(playerOne.board)
+            gameFlow.checkWinner(playerOne.board, playerOne.getName())
         } else if (gameFlow.getTurn() === false) {
             gameboard.board.splice(index, 1, 'o')
             selectedSpace.textContent = 'o'
             playerTwo.move(Number(index))
+            gameFlow.checkWinner(playerTwo.board, playerTwo.getName())
         }
     }
 
@@ -64,6 +64,8 @@ const drawBoard = (() => {
             gameWrap.removeChild(child)
             child = gameWrap.lastElementChild
         }
+        playerOne.resetPlayerBoard()
+        playerTwo.resetPlayerBoard()
         gameboard.board = [
             '', '', '',
             '', '', '', 
@@ -102,21 +104,17 @@ const gameFlow = (() => {
 
     function win (player) {
         console.log(`${player} WINS!`)
-        playerOne.resetPlayerBoard
-        playerTwo.resetPlayerBoard
         drawBoard.resetGame()
     }
 
-    const checkWinner = (chkbd) => {
-        let winner=''
-        //const checker=()=> Object.values(winCombos).every(value => chkbd.includes(value))
-        //console.log(checker())
-
+    const checkWinner = (checkBoard, player) => {
         for (const key in winCombos) {
-            if (winCombos[key].every(v => chkbd.includes(v))){
-                winner='p1'
-                win(winner)
+            if (winCombos[key].every(v => checkBoard.includes(v))){
+                win(player)
             }
+        }
+        if (playerOne.board.length === 5 && playerTwo.board.length === 4) {
+            console.log('it is a tie')
         }
     }
     
