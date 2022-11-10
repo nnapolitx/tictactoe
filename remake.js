@@ -34,6 +34,7 @@ const drawBoard = (() => {
             selectedSpace.textContent = 'o'
         }
 
+        gameFlow.checkWinner()
     }
 
     function resetGame() {
@@ -55,7 +56,31 @@ const drawBoard = (() => {
     resetBtn.addEventListener('click', resetGame)
 
     drawSpaces()
+
+    return {resetGame}
 })()
+
+//Factory for players 1 and 2
+const Player = (name) => {
+    const getName = () => name
+    const board = [
+        '', '', '',
+        '', '', '', 
+        '', '', ''
+    ]
+
+    const resetPlayerBoard = () => {
+        console.log(`reset ${name}'s board`)
+    }
+
+    const move = () => {
+        console.log(`${name} moved`)
+    }
+
+    return {getName, resetPlayerBoard, move}
+}
+
+
 
 const gameFlow = (() => {
     const getTurn = () => {
@@ -63,6 +88,76 @@ const gameFlow = (() => {
         if (turns % 2 === 0) return true
         else return false
     }
+
+    function win (player) {
+        console.log(`${player} WINS!`)
+        drawBoard.resetGame()
+    }
+
+    const checkWinner = () => {
+        console.log('checking winner')
+        let winner;
+
+        switch (gameboard.board) {
+            case [
+                'x', 'x', 'x',
+                '', '', '', 
+                '', '', ''
+                ]: 
+            winner = 'player 1'
+            break
+            case [
+                'x', '', '',
+                '', 'x', '', 
+                '', '', 'x'
+                ]: 
+            winner = 'player 1'
+            break
+            case [
+                '', '', 'x',
+                '', 'x', '', 
+                'x', '', ''
+                ]: 
+            winner = 'player 1'
+            break
+            case [
+                '', '', '',
+                'x', 'x', 'x', 
+                '', '', ''
+                ]: 
+            winner = 'player 1'
+            break
+            case [
+                '', '', '',
+                '', '', '', 
+                'x', 'x', 'x'
+                ]: 
+            winner = 'player 1'
+            break
+            case [
+                'x', '', '',
+                'x', '', '', 
+                'x', '', ''
+                ]: 
+            winner = 'player 1'
+            break
+            case [
+                '', 'x', '',
+                '', 'x', '', 
+                '', 'x', ''
+                ]: 
+            winner = 'player 1'
+            break
+            case [
+                '', '', 'x',
+                '', '', 'x', 
+                '', '', 'x'
+                ]: 
+            winner = 'player 1'
+            break
+        }
+        if (winner === 'player1') win(winner)
+    }
     
-    return {getTurn}
+    return {getTurn, checkWinner}
 })()

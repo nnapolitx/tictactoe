@@ -46,13 +46,13 @@ const makeGameBoard = (() => {
 resetBtn.addEventListener('click', makeGameBoard.resetGame)
 
 // add factory for two players
-const Player = (symbol, name) => {
+/*const Player = (symbol, name) => {
     const getSymbol = () => symbol
     const getName = () => name
     const moves = []
 
     return {getSymbol, getName}
-}
+}*/
 
 //gameflow object
 const gamePlay = (() => {
