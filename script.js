@@ -1,93 +1,122 @@
-let gameboard = []
-const boardWrap = document.querySelector('.board-wrap')
-const resetBtn = document.querySelector('.reset')
+//select the div to append the gameboard to
+const gameWrap = document.querySelector('.board-wrap')
 
-// add a IIFE for creating gameboard
-const makeGameBoard = (() => {
-    function drawspaces() {
-        for (let i = 0; i < 9; i++) {
+//Factory for players 1 and 2
+const Player = (name) => {
+    const getName = () => name
+    const board = []
+
+    const resetPlayerBoard = () => {
+        board.length=0;
+    }
+
+    const move = (index) => {
+        board.push(index)
+    }
+
+    return {getName, resetPlayerBoard, board, move}
+}
+//hardcoded Players with factory
+const playerOne = Player('p1')
+const playerTwo = Player('p2')
+
+const gameboard = {
+    'board':
+    [
+        '', '', '',
+        '', '', '', 
+        '', '', ''
+    ]
+};
+
+const drawBoard = (() => {
+    //draw spaces based on the gameboard object
+    const drawSpaces = () => {
+        for (let i=0; i<gameboard.board.length; i++){
             const space = document.createElement('div')
+            gameWrap.appendChild(space)
+            space.textContent=gameboard.board[i]
             space.setAttribute('data', `${i}`)
-            boardWrap.appendChild(space)
-            space.addEventListener('click', spaceClicked, {once:true})
+            space.addEventListener('click', clickedSpace, {once:true})
         }
     }
 
-    function spaceClicked(e) {
-        let clickedSpace = e.target
-        let playerTurn = gamePlay.getTurn()
-        if (playerTurn === true){
-            const xImg = document.createElement('img')
-            xImg.src = 'img/x.svg'
-            clickedSpace.appendChild(xImg)
-            gameboard[clickedSpace.getAttribute('data')] = 'x'
-        } else if (playerTurn === false) {
-            const oImg =document.createElement('img')
-            oImg.src = 'img/o.svg'
-            clickedSpace.appendChild(oImg)
-            gameboard[clickedSpace.getAttribute('data')] = 'o'
+    function clickedSpace(e){
+        const selectedSpace = e.target
+        const index = selectedSpace.getAttribute('data')
+
+        if (gameFlow.getTurn() === true) {
+            gameboard.board.splice(index, 1, 'x')
+            selectedSpace.textContent = 'x'
+            playerOne.move(Number(index))
+            gameFlow.checkWinner(playerOne.board, playerOne.getName())
+        } else if (gameFlow.getTurn() === false) {
+            gameboard.board.splice(index, 1, 'o')
+            selectedSpace.textContent = 'o'
+            playerTwo.move(Number(index))
+            gameFlow.checkWinner(playerTwo.board, playerTwo.getName())
         }
     }
 
     function resetGame() {
-        let child = boardWrap.lastElementChild
+        let child = gameWrap.lastElementChild
         while (child) {
-            boardWrap.removeChild(child)
-            child = boardWrap.lastElementChild
+            gameWrap.removeChild(child)
+            child = gameWrap.lastElementChild
         }
-        gameboard = []
-        drawspaces()
+        playerOne.resetPlayerBoard()
+        playerTwo.resetPlayerBoard()
+        gameboard.board = [
+            '', '', '',
+            '', '', '', 
+            '', '', ''
+        ]
+        drawSpaces()
     }
 
-    drawspaces()
+    //select reset button and add clickEvent for ResetGame()
+    const resetBtn = document.querySelector('.reset')
+    resetBtn.addEventListener('click', resetGame)
+
+    drawSpaces()
+
     return {resetGame}
-})();
+})()
 
-resetBtn.addEventListener('click', makeGameBoard.resetGame)
 
-// add factory for two players
-/*const Player = (symbol, name) => {
-    const getSymbol = () => symbol
-    const getName = () => name
-    const moves = []
-
-    return {getSymbol, getName}
-}*/
-
-//gameflow object
-const gamePlay = (() => {
+const gameFlow = (() => {
     const getTurn = () => {
-        let turns = gameboard.filter(String).length
+        let turns = gameboard.board.filter(String).length
         if (turns % 2 === 0) return true
         else return false
     }
 
-    //not sure if I should create this, then check in the player objects to see if their spaces match any of these combinations, or if I should do this another way
-    const winArray = [
-        [0, 1, 2],
-        [3, 4, 5],
-        [6, 7, 8],
-        [0, 4, 8],
-        [2, 4, 6],
-        [0, 3, 6],
-        [1, 4, 7],
-        [2, 5, 8]
-    ];
+    const winCombos = {
+        a: [0, 1, 2],
+        b: [3, 4, 5],
+        c: [6, 7, 8],
+        d: [0, 4, 8],
+        e: [2, 4, 6],
+        f: [0, 3, 6],
+        g: [1, 4, 7],
+        h: [2, 5, 8]
+    };
 
-    return {getTurn, winArray}
-})()
-
-//TOP gives instructions to create a gameboard using an array inside of an object. Not sure how to do this
-gameObject = {
-    'Player1': [],
-    'Player2': []
+    function win (player) {
+        console.log(`${player} WINS!`)
+        drawBoard.resetGame()
     }
 
-
-/* ------TO DO's--------
--have the game notice and announce a winner
--begin adding AI
-
-
-*/
-
+    const checkWinner = (checkBoard, player) => {
+        for (const key in winCombos) {
+            if (winCombos[key].every(v => checkBoard.includes(v))){
+                win(player)
+            }
+        }
+        if (playerOne.board.length === 5 && playerTwo.board.length === 4) {
+            console.log('it is a tie')
+        }
+    }
+    
+    return {getTurn, checkWinner}
+})()
