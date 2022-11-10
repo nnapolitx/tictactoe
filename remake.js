@@ -1,6 +1,26 @@
 //select the div to append the gameboard to
 const gameWrap = document.querySelector('.board-wrap')
 
+//Factory for players 1 and 2
+const Player = (name) => {
+    const getName = () => name
+    const board = []
+
+    const resetPlayerBoard = () => {
+        console.log(`reset ${name}'s board`)
+        board = []
+    }
+
+    const move = (index) => {
+        board.push(index)
+    }
+
+    return {getName, resetPlayerBoard, board, move}
+}
+//hardcoded Players with factory
+const playerOne = Player('p1')
+const playerTwo = Player('p2')
+
 const gameboard = {
     'board':
     [
@@ -29,13 +49,13 @@ const drawBoard = (() => {
         if (gameFlow.getTurn() === true) {
             gameboard.board.splice(index, 1, 'x')
             selectedSpace.textContent = 'x'
-
+            playerOne.move(index)
+            gameFlow.checkWinner(playerOne.board)
         } else if (gameFlow.getTurn() === false) {
             gameboard.board.splice(index, 1, 'o')
             selectedSpace.textContent = 'o'
+            playerTwo.move(index)
         }
-
-        gameFlow.checkWinner()
     }
 
     function resetGame() {
@@ -61,30 +81,6 @@ const drawBoard = (() => {
     return {resetGame}
 })()
 
-//Factory for players 1 and 2
-const Player = (name) => {
-    const getName = () => name
-    const board = [
-        '', '', '',
-        '', '', '', 
-        '', '', ''
-    ]
-
-    const resetPlayerBoard = () => {
-        console.log(`reset ${name}'s board`)
-    }
-
-    const move = (mark, index) => {
-        console.log(`${name} placed an ${mark} at ${index}`)
-        board.splice(index, 1, mark)
-        console.log(board)
-    }
-
-    return {getName, resetPlayerBoard, move}
-}
-
-const playerOne = Player('p1')
-const playerTwo = Player('p2')
 
 const gameFlow = (() => {
     const getTurn = () => {
@@ -93,74 +89,28 @@ const gameFlow = (() => {
         else return false
     }
 
+    const winCombos = {
+        a: ['0', '1', '2'],
+        b: [3, 4, 5],
+        c: [6, 7, 8],
+        d: [0, 4, 8],
+        e: [2, 4, 6],
+        f: [0, 3, 6],
+        g: [1, 4, 7],
+        h: [2, 5, 8]
+    };
+
     function win (player) {
         console.log(`${player} WINS!`)
+        playerOne.resetPlayerBoard
+        playerTwo.resetPlayerBoard
         drawBoard.resetGame()
     }
 
-    const checkWinner = () => {
+    const checkWinner = (chkbd) => {
         console.log('checking winner')
-        let winner;
-
-        switch (gameboard.board) {
-            case [
-                'x', 'x', 'x',
-                '', '', '', 
-                '', '', ''
-                ]: 
-            winner = 'player 1'
-            break
-            case [
-                'x', '', '',
-                '', 'x', '', 
-                '', '', 'x'
-                ]: 
-            winner = 'player 1'
-            break
-            case [
-                '', '', 'x',
-                '', 'x', '', 
-                'x', '', ''
-                ]: 
-            winner = 'player 1'
-            break
-            case [
-                '', '', '',
-                'x', 'x', 'x', 
-                '', '', ''
-                ]: 
-            winner = 'player 1'
-            break
-            case [
-                '', '', '',
-                '', '', '', 
-                'x', 'x', 'x'
-                ]: 
-            winner = 'player 1'
-            break
-            case [
-                'x', '', '',
-                'x', '', '', 
-                'x', '', ''
-                ]: 
-            winner = 'player 1'
-            break
-            case [
-                '', 'x', '',
-                '', 'x', '', 
-                '', 'x', ''
-                ]: 
-            winner = 'player 1'
-            break
-            case [
-                '', '', 'x',
-                '', '', 'x', 
-                '', '', 'x'
-                ]: 
-            winner = 'player 1'
-            break
-        }
-        if (winner === 'player1') win(winner)
+        const checker=()=> winCombos.a.every(value => chkbd.includes(value))
+        console.log(checker())
     }
     
     return {getTurn, checkWinner}
