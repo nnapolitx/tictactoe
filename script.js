@@ -104,11 +104,14 @@ const gameFlow = (() => {
 
     function win (player, arr) {
         console.log(`${player.getName()} WINS!`)
-        const line = document.createElement('div')
-        line.classList.add('win-line')
+        //const line = document.createElement('div')
+        //line.classList.add('win-line')
         const beginLine = document.querySelector(`[data="${arr[0]}"]`)
-        beginLine.appendChild(line)
-
+        beginLine.classList.add('win-line')
+        const middleLine = document.querySelector(`[data="${arr[1]}"]`)
+        middleLine.classList.add('win-line')
+        const endLine = document.querySelector(`[data="${arr[2]}"]`)
+        endLine.classList.add('win-line')
         //drawBoard.resetGame()
     }
 

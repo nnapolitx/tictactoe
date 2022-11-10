@@ -34,10 +34,6 @@ body {
 }
 
 .win-line {
-    position: absolute;
-    border: 1px solid black;
-    width: 300px;
-    margin: 0;
-    padding: 0;
-    
+    background-color:rgba(197, 191, 139, 0.781);
+
 }
