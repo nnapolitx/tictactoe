@@ -29,6 +29,7 @@ const drawBoard = (() => {
         if (gameFlow.getTurn() === true) {
             gameboard.board.splice(index, 1, 'x')
             selectedSpace.textContent = 'x'
+
         } else if (gameFlow.getTurn() === false) {
             gameboard.board.splice(index, 1, 'o')
             selectedSpace.textContent = 'o'
@@ -73,14 +74,17 @@ const Player = (name) => {
         console.log(`reset ${name}'s board`)
     }
 
-    const move = () => {
-        console.log(`${name} moved`)
+    const move = (mark, index) => {
+        console.log(`${name} placed an ${mark} at ${index}`)
+        board.splice(index, 1, mark)
+        console.log(board)
     }
 
     return {getName, resetPlayerBoard, move}
 }
 
-
+const playerOne = Player('p1')
+const playerTwo = Player('p2')
 
 const gameFlow = (() => {
     const getTurn = () => {
