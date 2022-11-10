@@ -49,6 +49,8 @@ resetBtn.addEventListener('click', makeGameBoard.resetGame)
 const Player = (symbol, name) => {
     const getSymbol = () => symbol
     const getName = () => name
+    const moves = []
+
     return {getSymbol, getName}
 }
 
