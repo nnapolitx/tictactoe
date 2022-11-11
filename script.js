@@ -20,6 +20,10 @@ const Player = (name) => {
 const playerOne = Player('p1')
 const playerTwo = Player('p2')
 
+//need a game input function that creates player based on user input
+
+//need a reset game function that can be called and resets back to user input screen
+
 const gameboard = {
     'board':
     [
@@ -132,12 +136,12 @@ const gameFlow = (() => {
 })()
 
 /*To dos
--create a line ~animation-ish thingy for the winner
 -add a user interface that:
     -asks user to input a name and select either player 2 or computer
     -begins the game and counts wins
     -change reset button to 'New Match'
     -add a reset game button that resets the page to ask the user to enter a new name
+-create a line ~animation-ish thingy for the winner
 -begin creating AI by having it pick random available squares from the gameboard Object
 -give the AI some knowledge with own logic
 -finally, have the AI become impossible with minmax() theorem

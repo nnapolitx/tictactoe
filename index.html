@@ -10,12 +10,22 @@
 </head>
 <body>
     <h1>tic-tac-toe</h1>
-    <div class="input-row"></div>
+    <div class="input-row">
+        <form action=""class="player-info">
+            <label for="player-1">Player One's Name</label>
+            <input type="text" id="player-1" name="player-1" value="Player One" class="player-1-name">
+
+            <label for="player-2">Player Two's Name</label>
+            <input type="text" id="player-2" name="player-2" value="Player Two" class="player-2-name">
+            <button type="button" class="submit-info" id="play-game">Play Game!</button>
+        </form>
+    </div>
 
     <div class="board-wrap"></div>
 
     <div class="ui-row">
-        <button class="reset">Reset Game</button>
+        <button class="reset">Reset Match</button>
+        <button class="new-game">Reset Game</button>
     </div>
     
 </body>

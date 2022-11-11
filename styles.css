@@ -26,11 +26,61 @@ body {
     align-items: center;
 }
 
+.input-row {
+    /*visibility: hidden;*/
+    border-top: 2px solid black;
+    border-bottom: 2px solid black;
+    padding: 3rem;
+    position: absolute;
+    top: 4.5rem;
+    background-color: rgb(240, 240, 240);
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.player-info {
+    max-width: 500px;
+    font-size: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.player-info > .player-1-name {
+    margin-bottom: 1rem;
+}
+
+.submit-info {
+    margin-top: 1rem;
+    font-size: 1.5rem;
+    padding: 1rem 1.25rem;
+    width: fit-content;
+    border-radius: .5rem;
+    outline: 2px solid black;
+    box-shadow: 2px 2px 2px 2px;
+    background-color: rgba(197, 191, 139, 0.781);
+}
+
+.player-info>input{
+    appearance: none;
+    outline: 1px solid slategray;
+    padding: 8px 4px;
+    font-size: 1.25rem;
+    margin-top: 8px;
+    text-align: center;
+    border: none;
+    border-radius: .5rem;
+    width: 18ch;
+}
+
 .ui-row {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    display: flex;
+    justify-content: center;
     gap: 1rem;
-    margin: 8px;
+    margin: 2rem;
 }
 
 .win-line {
