@@ -1,7 +1,6 @@
 //select the div to append the gameboard to
 const gameWrap = document.querySelector('.board-wrap')
 
-
 //need a game input function that creates player based on user input
 const gameInput = (()=>{
     const newPlayer1 = document.querySelector('.player-1-name')
@@ -14,20 +13,31 @@ const gameInput = (()=>{
         return newPlayer2.value
     }
 
-    const playBtn = document.querySelector('#play-game')
-    playBtn.addEventListener('click', startGame)
+    function makePlayer(x) {
+        console.log('in')
+        if (x === 1){
+            return getFirstName()
+        } else return getSecondName()
+    }
 
-    function startGame() {
+    function startGame(playerOne, playerTwo) {
         const hide = document.querySelector('.input-row')
         hide.style.visibility = 'hidden'
     }
 
-    return{getFirstName, getSecondName}
+    const playBtn = document.querySelector('#play-game')
+    playBtn.addEventListener('click', startGame)
+
+    return{makePlayer, startGame}
 })()
 
 //Factory for players 1 and 2
-const Player = (name) => {
-    const getName = () => name
+const Player = (x) => {
+    const getName = () => {
+        if (x === 1) {
+            return gameInput.makePlayer(1)
+        } else return gameInput.makePlayer(2)
+    }
     const board = []
 
     const resetPlayerBoard = () => {
@@ -41,9 +51,11 @@ const Player = (name) => {
     return {getName, resetPlayerBoard, board, move}
 }
 
+let playerOne = Player(1)
+let playerTwo = Player(2)
+
+//may need a function that gets called to create the player from the Factory
 //hardcoded Players with factory will change later
-let playerOne = Player(`${gameInput.getFirstName()}`)
-let playerTwo = Player(`${gameInput.getSecondName()}`)
 
 //need a reset game function that can be called and resets back to user input screen
 
@@ -108,9 +120,6 @@ const drawBoard = (() => {
         resetGame()
         const show = document.querySelector('.input-row')
         show.style.visibility = "visible"
-
-        playerOne = Player(`${gameInput.getFirstName()}`)
-        playerTwo = Player(`${gameInput.getSecondName()}`)
     }
 
     //select reset button and add clickEvent for ResetGame()
@@ -170,7 +179,11 @@ const gameFlow = (() => {
     return {getTurn, checkWinner}
 })()
 
-/*To dos
+/*
+current bugs/problems
+-the required attribute does not seem to work, may need an if statement on the eventlistener.
+
+To dos
 -add a user interface that:
     -asks user to input a name and select either player 2 or computer
     -begins the game and counts wins
