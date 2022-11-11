@@ -1,6 +1,30 @@
 //select the div to append the gameboard to
 const gameWrap = document.querySelector('.board-wrap')
 
+
+//need a game input function that creates player based on user input
+const gameInput = (()=>{
+    const newPlayer1 = document.querySelector('.player-1-name')
+    const newPlayer2 = document.querySelector('.player-2-name')
+
+    const getFirstName = () => {
+        return newPlayer1.value
+    }
+    const getSecondName = () => {
+        return newPlayer2.value
+    }
+
+    const playBtn = document.querySelector('#play-game')
+    playBtn.addEventListener('click', startGame)
+
+    function startGame() {
+        const hide = document.querySelector('.input-row')
+        hide.style.visibility = 'hidden'
+    }
+
+    return{getFirstName, getSecondName}
+})()
+
 //Factory for players 1 and 2
 const Player = (name) => {
     const getName = () => name
@@ -17,25 +41,9 @@ const Player = (name) => {
     return {getName, resetPlayerBoard, board, move}
 }
 
-//need a game input function that creates player based on user input
-const gameInput = (()=>{
-    const newPlayer1 = document.querySelector('.player-1-name')
-    const newPlayer2 = document.querySelector('.player-2-name')
-
-    const playBtn = document.querySelector('#play-game')
-    playBtn.addEventListener('click', startGame)
-
-    function startGame() {
-        const hide = document.querySelector('.input-row')
-        hide.style.visibility = 'hidden'
-    }
-
-    return{newPlayer1, newPlayer2}
-})()
-
 //hardcoded Players with factory will change later
-const playerOne = Player(`${gameInput.newPlayer1.value}`)
-const playerTwo = Player(`${gameInput.newPlayer2.value}`)
+let playerOne = Player(`${gameInput.getFirstName()}`)
+let playerTwo = Player(`${gameInput.getSecondName()}`)
 
 //need a reset game function that can be called and resets back to user input screen
 
@@ -91,6 +99,18 @@ const drawBoard = (() => {
             '', '', ''
         ]
         drawSpaces()
+    }
+
+    const newGameBtn = document.querySelector('.new-game')
+    newGameBtn.addEventListener('click', newGame)
+
+    function newGame (){
+        resetGame()
+        const show = document.querySelector('.input-row')
+        show.style.visibility = "visible"
+
+        playerOne = Player(`${gameInput.getFirstName()}`)
+        playerTwo = Player(`${gameInput.getSecondName()}`)
     }
 
     //select reset button and add clickEvent for ResetGame()
