@@ -18,11 +18,24 @@ const Player = (name) => {
 }
 
 //need a game input function that creates player based on user input
+const gameInput = (()=>{
+    const newPlayer1 = document.querySelector('.player-1-name')
+    const newPlayer2 = document.querySelector('.player-2-name')
 
+    const playBtn = document.querySelector('#play-game')
+    playBtn.addEventListener('click', startGame)
+
+    function startGame() {
+        const hide = document.querySelector('.input-row')
+        hide.style.visibility = 'hidden'
+    }
+
+    return{newPlayer1, newPlayer2}
+})()
 
 //hardcoded Players with factory will change later
-const playerOne = Player('p1')
-const playerTwo = Player('p2')
+const playerOne = Player(`${gameInput.newPlayer1.value}`)
+const playerTwo = Player(`${gameInput.newPlayer2.value}`)
 
 //need a reset game function that can be called and resets back to user input screen
 
