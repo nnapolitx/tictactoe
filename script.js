@@ -113,6 +113,15 @@ const drawBoard = (() => {
         drawSpaces()
     }
 
+    function removeEvents(gameWrap) {
+        let child = gameWrap.children
+        console.log(child)
+        for (let key in child) {
+            console.log(child[key])
+            child[key].removeEventListener('click', clickedSpace,)
+        }
+    }
+
     const newGameBtn = document.querySelector('.new-game')
     newGameBtn.addEventListener('click', newGame)
 
@@ -128,7 +137,7 @@ const drawBoard = (() => {
 
     drawSpaces()
 
-    return {resetGame}
+    return {resetGame, removeEvents}
 })()
 
 
@@ -160,6 +169,8 @@ const gameFlow = (() => {
         middleLine.classList.add('win-line')
         const endLine = document.querySelector(`[data="${arr[2]}"]`)
         endLine.classList.add('win-line')
+
+        drawBoard.removeEvents(gameWrap)
         //drawBoard.resetGame()
     }
 
