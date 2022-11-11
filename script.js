@@ -16,11 +16,13 @@ const Player = (name) => {
 
     return {getName, resetPlayerBoard, board, move}
 }
-//hardcoded Players with factory
-const playerOne = Player('p1')
-const playerTwo = Player('p2')
 
 //need a game input function that creates player based on user input
+
+
+//hardcoded Players with factory will change later
+const playerOne = Player('p1')
+const playerTwo = Player('p2')
 
 //need a reset game function that can be called and resets back to user input screen
 

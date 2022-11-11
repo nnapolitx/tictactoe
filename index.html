@@ -13,10 +13,11 @@
     <div class="input-row">
         <form action=""class="player-info">
             <label for="player-1">Player One's Name</label>
-            <input type="text" id="player-1" name="player-1" value="Player One" class="player-1-name">
+            <input type="text" id="player-1" name="player-1" value="Player One" class="player-1-name" required>
 
             <label for="player-2">Player Two's Name</label>
-            <input type="text" id="player-2" name="player-2" value="Player Two" class="player-2-name">
+            <input type="text" id="player-2" name="player-2" value="Player Two" class="player-2-name" required>
+            
             <button type="button" class="submit-info" id="play-game">Play Game!</button>
         </form>
     </div>
@@ -24,6 +25,8 @@
     <div class="board-wrap"></div>
 
     <div class="ui-row">
+        <div class="name-1"></div>
+        <div class="name-2"></div>
         <button class="reset">Reset Match</button>
         <button class="new-game">Reset Game</button>
     </div>
