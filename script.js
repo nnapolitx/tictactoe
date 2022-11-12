@@ -20,8 +20,21 @@ const gameInput = (()=>{
     }
 
     function startGame(playerOne, playerTwo) {
-        const hide = document.querySelector('.input-row')
-        hide.style.visibility = 'hidden'
+        const errorMsg1 = document.querySelector('.errorMsg1')
+        const errorMsg2 = document.querySelector('.errorMsg2')
+
+        if (newPlayer1.value === null || newPlayer1.value === undefined || newPlayer1.value === '') {
+            errorMsg1.textContent = 'Please enter a name for player one.'  
+        } else errorMsg1.textContent=''
+        if (newPlayer2.value === null || newPlayer2.value === undefined || newPlayer2.value === ''){
+            errorMsg2.textContent = 'Please enter a name for player two.'
+        } else errorMsg2.textContent=''
+        if (newPlayer1.value !== undefined && newPlayer1.value !== '' && newPlayer2.value !== undefined && newPlayer2.value !== '') {
+            errorMsg1.textContent=''
+            errorMsg2.textContent=''
+            const hide = document.querySelector('.input-row')
+            hide.style.visibility = 'hidden'
+        }
     }
 
     const playBtn = document.querySelector('#play-game')
@@ -52,11 +65,6 @@ const Player = (x) => {
 
 let playerOne = Player(1)
 let playerTwo = Player(2)
-
-//may need a function that gets called to create the player from the Factory
-//hardcoded Players with factory will change later
-
-//need a reset game function that can be called and resets back to user input screen
 
 const gameboard = {
     'board':
