@@ -53,11 +53,6 @@ const Player = (x) => {
 let playerOne = Player(1)
 let playerTwo = Player(2)
 
-//may need a function that gets called to create the player from the Factory
-//hardcoded Players with factory will change later
-
-//need a reset game function that can be called and resets back to user input screen
-
 const gameboard = {
     'board':
     [
