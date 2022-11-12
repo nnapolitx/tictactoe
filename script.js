@@ -14,7 +14,6 @@ const gameInput = (()=>{
     }
 
     function makePlayer(x) {
-        console.log('in')
         if (x === 1){
             return getFirstName()
         } else return getSecondName()
@@ -113,13 +112,12 @@ const drawBoard = (() => {
         drawSpaces()
     }
 
-    function removeEvents(gameWrap) {
-        let child = gameWrap.children
-        console.log(child)
-        for (let key in child) {
-            console.log(child[key])
-            child[key].removeEventListener('click', clickedSpace,)
+    function removeEvents() {
+        for(let i=0; i<9; i++){
+            const child = document.querySelector(`[data="${i}"]`)
+            child.removeEventListener('click', clickedSpace)
         }
+
     }
 
     const newGameBtn = document.querySelector('.new-game')
@@ -170,7 +168,7 @@ const gameFlow = (() => {
         const endLine = document.querySelector(`[data="${arr[2]}"]`)
         endLine.classList.add('win-line')
 
-        drawBoard.removeEvents(gameWrap)
+        drawBoard.removeEvents()
         //drawBoard.resetGame()
     }
 
