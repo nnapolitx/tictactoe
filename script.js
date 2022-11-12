@@ -63,8 +63,8 @@ const Player = (x) => {
     return {getName, resetPlayerBoard, board, move}
 }
 
-let playerOne = Player(1)
-let playerTwo = Player(2)
+const playerOne = Player(1)
+const playerTwo = Player(2)
 
 const gameboard = {
     'board':
@@ -198,7 +198,6 @@ const gameFlow = (() => {
 
 /*
 current bugs/problems
--the required attribute does not seem to work, may need an if statement on the eventlistener.
 
 To dos
 -add a user interface that:
