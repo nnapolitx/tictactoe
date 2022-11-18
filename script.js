@@ -34,7 +34,13 @@ const gameInput = (()=>{
             errorMsg2.textContent=''
             const hide = document.querySelector('.input-row')
             hide.style.visibility = 'hidden'
+
+            const playerOneName = document.querySelector('.p1-name')
+            const playerTwoName = document.querySelector('.p2-name')
+            playerOneName.textContent = newPlayer1.value
+            playerTwoName.textContent = newPlayer2.value
         }
+        
     }
 
     const playBtn = document.querySelector('#play-game')
@@ -167,8 +173,6 @@ const gameFlow = (() => {
 
     function win (player, arr) {
         console.log(`${player.getName()} WINS!`)
-        //const line = document.createElement('div')
-        //line.classList.add('win-line')
         const beginLine = document.querySelector(`[data="${arr[0]}"]`)
         beginLine.classList.add('win-line')
         const middleLine = document.querySelector(`[data="${arr[1]}"]`)
@@ -177,7 +181,6 @@ const gameFlow = (() => {
         endLine.classList.add('win-line')
 
         drawBoard.removeEvents()
-        //drawBoard.resetGame()
     }
 
     const checkWinner = (checkBoard, player) => {
@@ -189,12 +192,12 @@ const gameFlow = (() => {
         }
         if (playerOne.board.length === 5 && playerTwo.board.length === 4) {
             console.log('it is a tie')
-            drawBoard.resetGame()
         }
     }
-    
     return {getTurn, checkWinner}
 })()
+
+
 
 /*
 current bugs/problems

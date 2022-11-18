@@ -76,14 +76,14 @@ body {
     display: flex;
     justify-content: center;
     gap: 1rem;
-    margin: 2rem;
+    margin: .5rem;
 }
 
 .score-row {
     display: flex;
     justify-content: center;
     gap: 1rem;
-    margin: 2rem;
+    margin: .5rem;
 }
 
 .win-line {
