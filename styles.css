@@ -79,9 +79,15 @@ body {
     margin: 2rem;
 }
 
+.score-row {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin: 2rem;
+}
+
 .win-line {
     background-color:rgba(197, 191, 139, 0.781);
-
 }
 
 .player-info > p {
