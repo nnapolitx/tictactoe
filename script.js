@@ -65,6 +65,8 @@ const Player = (x) => {
     const move = (index) => {
         board.push(index)
     }
+    //consider creating a score and score element that corresponds to the player name with data attribute 
+    let score;
 
     return {getName, resetPlayerBoard, board, move}
 }
