@@ -14,22 +14,28 @@
         <form action=""class="player-info">
             <label for="player-1">Player One's Name</label>
             <input type="text" id="player-1" name="player-1" value="Player One" class="player-1-name" required>
+            <p class="errorMsg1"></p>
 
             <label for="player-2">Player Two's Name</label>
             <input type="text" id="player-2" name="player-2" value="Player Two" class="player-2-name" required>
-            
+            <p class="errorMsg2"></p>
+
             <button type="button" class="submit-info" id="play-game">Play Game!</button>
         </form>
     </div>
-
     <div class="board-wrap"></div>
 
+    <div class="score-row">
+        <div class="p1-name">Player One</div>
+        <div class="p1-score">0</div>
+        <div class="p2-name">Player Two</div>
+        <div class="p2-score">0</div>
+    </div>
     <div class="ui-row">
-        <div class="name-1"></div>
-        <div class="name-2"></div>
-        <button class="reset">Reset Match</button>
+        <button class="reset">New Match</button>
         <button class="new-game">Reset Game</button>
     </div>
+    <div class="announce-row"></div>
     
 </body>
 </html>
