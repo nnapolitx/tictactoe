@@ -217,12 +217,6 @@ const gameFlow = (() => {
 current bugs/problems
 
 To dos
--add a user interface that:
-    -asks user to input a name and select either player 2 or computer
-    -begins the game and counts wins
-    -change reset button to 'New Match'
-    -add a reset game button that resets the page to ask the user to enter a new name
--create a line ~animation-ish thingy for the winner
 -begin creating AI by having it pick random available squares from the gameboard Object
 -give the AI some knowledge with own logic
 -finally, have the AI become impossible with minmax() theorem
