@@ -66,7 +66,6 @@ const Player = (x) => {
         board.push(index)
     }
     //consider creating a score and score element that corresponds to the player name with data attribute 
-    let score;
 
     return {getName, resetPlayerBoard, board, move}
 }
@@ -171,7 +170,12 @@ const gameFlow = (() => {
         f: [0, 3, 6],
         g: [1, 4, 7],
         h: [2, 5, 8]
-    };
+    }
+
+    const p1ScoreBoard = document.querySelector('.p1-score')
+    let playerOneScore = 0
+    const p2ScoreBoard = document.querySelector('.p2-score')
+    let playerTwoScore = 0
 
     function win (player, arr) {
         console.log(`${player.getName()} WINS!`)
@@ -181,6 +185,14 @@ const gameFlow = (() => {
         middleLine.classList.add('win-line')
         const endLine = document.querySelector(`[data="${arr[2]}"]`)
         endLine.classList.add('win-line')
+
+        if (player === playerOne){
+            playerOneScore += 1
+            p1ScoreBoard.textContent =  playerOneScore
+        }else {
+            playerTwoScore += 1
+            p2ScoreBoard.textContent = playerTwoScore
+        }
 
         drawBoard.removeEvents()
     }
