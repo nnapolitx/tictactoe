@@ -40,11 +40,24 @@ const gameInput = (()=>{
             playerOneName.textContent = newPlayer1.value
             playerTwoName.textContent = newPlayer2.value
         }
+    }
+
+    function versusComp() {
+        if (newPlayer1.value === null || newPlayer1.value === undefined || newPlayer1.value === '') {
+            errorMsg1.textContent = 'Please enter a name for player one.'  
+        } else {
+            errorMsg1.textContent=''
+            const hide = document.querySelector('.input-row')
+            hide.style.visibility = 'hidden'
+        }
         
     }
 
     const playBtn = document.querySelector('#play-game')
     playBtn.addEventListener('click', startGame)
+
+    const compBtn = document.querySelector('#comp-btn')
+    compBtn.addEventListener('click', versusComp)
 
     return{makePlayer, startGame}
 })()
@@ -65,9 +78,28 @@ const Player = (x) => {
     const move = (index) => {
         board.push(index)
     }
-    //consider creating a score and score element that corresponds to the player name with data attribute 
-
+    
     return {getName, resetPlayerBoard, board, move}
+}
+
+const Computer = (x) =>{
+    const active = () =>{
+        if (x === 1) {
+            return true
+        } else false
+    }
+
+    const board = []
+
+    const resetComputerBoard = ()=>{
+        board.length=0
+    }
+
+    const move = (index) => {
+        board.push(index)
+    }
+
+    return {active, resetComputerBoard, board, move}
 }
 
 const playerOne = Player(1)
