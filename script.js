@@ -124,6 +124,7 @@ const drawBoard = (() => {
             '', '', '', 
             '', '', ''
         ]
+        
         drawSpaces()
     }
 
@@ -139,9 +140,33 @@ const drawBoard = (() => {
     newGameBtn.addEventListener('click', newGame)
 
     function newGame (){
+        resetScoreBoard()
         resetGame()
         const show = document.querySelector('.input-row')
         show.style.visibility = "visible"
+    }
+
+    //Scoreboard functions
+    const p1ScoreBoard = document.querySelector('.p1-score')
+    let playerOneScore = 0
+    const p2ScoreBoard = document.querySelector('.p2-score')
+    let playerTwoScore = 0
+
+    function addScore(x){
+        if (x===1){
+            playerOneScore += 1
+            p1ScoreBoard.textContent =  playerOneScore
+        } else {
+            playerTwoScore += 1
+            p2ScoreBoard.textContent = playerTwoScore
+        }
+    }
+
+    function resetScoreBoard () {
+        playerOneScore = 0
+        p1ScoreBoard.textContent =  playerOneScore
+        playerTwoScore = 0
+        p2ScoreBoard.textContent = playerTwoScore
     }
 
     //select reset button and add clickEvent for ResetGame()
@@ -150,7 +175,7 @@ const drawBoard = (() => {
 
     drawSpaces()
 
-    return {resetGame, removeEvents}
+    return {resetGame, removeEvents, addScore}
 })()
 
 
@@ -172,11 +197,6 @@ const gameFlow = (() => {
         h: [2, 5, 8]
     }
 
-    const p1ScoreBoard = document.querySelector('.p1-score')
-    let playerOneScore = 0
-    const p2ScoreBoard = document.querySelector('.p2-score')
-    let playerTwoScore = 0
-
     function win (player, arr) {
         console.log(`${player.getName()} WINS!`)
         const beginLine = document.querySelector(`[data="${arr[0]}"]`)
@@ -187,11 +207,9 @@ const gameFlow = (() => {
         endLine.classList.add('win-line')
 
         if (player === playerOne){
-            playerOneScore += 1
-            p1ScoreBoard.textContent =  playerOneScore
+            drawBoard.addScore(1)
         }else {
-            playerTwoScore += 1
-            p2ScoreBoard.textContent = playerTwoScore
+            drawBoard.addScore(2)
         }
 
         drawBoard.removeEvents()
