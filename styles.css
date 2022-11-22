@@ -49,8 +49,8 @@ body {
     justify-content: center;
 }
 
-.submit-info {
-    margin-top: 1rem;
+.submit-info, .play-computer {
+    margin: 1.25rem 0rem;
     font-size: 1.5rem;
     padding: 1rem 1.25rem;
     width: fit-content;
