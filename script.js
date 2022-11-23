@@ -19,6 +19,8 @@ const gameInput = (()=>{
         } else return getSecondName()
     }
 
+    let compCheck = false
+
     function startGame(playerOne, playerTwo) {
         const errorMsg1 = document.querySelector('.errorMsg1')
         const errorMsg2 = document.querySelector('.errorMsg2')
@@ -34,6 +36,7 @@ const gameInput = (()=>{
             errorMsg2.textContent=''
             const hide = document.querySelector('.input-row')
             hide.style.visibility = 'hidden'
+            compCheck = false
 
             const playerOneName = document.querySelector('.p1-name')
             const playerTwoName = document.querySelector('.p2-name')
@@ -43,6 +46,7 @@ const gameInput = (()=>{
     }
 
     function versusComp() {
+        const errorMsg1 = document.querySelector('.errorMsg1')
         if (newPlayer1.value === null || newPlayer1.value === undefined || newPlayer1.value === '') {
             errorMsg1.textContent = 'Please enter a name for player one.'  
         } else {
@@ -51,6 +55,11 @@ const gameInput = (()=>{
             hide.style.visibility = 'hidden'
         }
         
+        compCheck = true
+    }
+
+    function getComputerStatus (){
+        return compCheck
     }
 
     const playBtn = document.querySelector('#play-game')
@@ -59,7 +68,7 @@ const gameInput = (()=>{
     const compBtn = document.querySelector('#comp-btn')
     compBtn.addEventListener('click', versusComp)
 
-    return{makePlayer, startGame}
+    return{makePlayer, startGame, getComputerStatus}
 })()
 
 //Factory for players 1 and 2
@@ -82,11 +91,9 @@ const Player = (x) => {
     return {getName, resetPlayerBoard, board, move}
 }
 
-const Computer = (x) =>{
-    const active = () =>{
-        if (x === 1) {
-            return true
-        } else false
+const Computer = () =>{
+    const active = () => {
+        return gameInput.getComputerStatus()
     }
 
     const board = []
@@ -104,6 +111,7 @@ const Computer = (x) =>{
 
 const playerOne = Player(1)
 const playerTwo = Player(2)
+const comp = Computer()
 
 const gameboard = {
     'board':
