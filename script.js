@@ -143,7 +143,9 @@ const drawBoard = (() => {
             selectedSpace.textContent = 'x'
             playerOne.move(Number(index))
             gameFlow.checkWinner(playerOne.board, playerOne)
-        } else if (gameFlow.getTurn() === false) {
+            console.log('comps turn')
+            //call function here for computer's turn, add the turn to the gameboard.board object
+        } else if (gameFlow.getTurn() === false && comp.active() === false) {
             gameboard.board.splice(index, 1, 'o')
             selectedSpace.textContent = 'o'
             playerTwo.move(Number(index))
