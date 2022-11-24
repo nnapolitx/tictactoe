@@ -143,14 +143,22 @@ const drawBoard = (() => {
             selectedSpace.textContent = 'x'
             playerOne.move(Number(index))
             gameFlow.checkWinner(playerOne.board, playerOne)
-            console.log('comps turn')
             //call function here for computer's turn, add the turn to the gameboard.board object
+            if (comp.active() === true) {
+                computerMove()
+            }
         } else if (gameFlow.getTurn() === false && comp.active() === false) {
             gameboard.board.splice(index, 1, 'o')
             selectedSpace.textContent = 'o'
             playerTwo.move(Number(index))
             gameFlow.checkWinner(playerTwo.board, playerTwo)
         }
+    }
+
+    //Idea here is to push the computer's move to the player2 board in order to reuse all of the win code
+    function computerMove (){
+        console.log('comp move fn')
+        
     }
 
     function resetGame() {
