@@ -157,7 +157,14 @@ const drawBoard = (() => {
 
     //Idea here is to push the computer's move to the player2 board in order to reuse all of the win code
     function computerMove (){
-        console.log('comp move fn')
+        let spaces = []
+        for (let i = 0; i<9; i++){
+            if (gameboard.board[i] === ''){
+                spaces.push(i)
+            }
+        }
+        let move = spaces[Math.floor(Math.random()*spaces.length)]
+        console.log(move)
         
     }
 
