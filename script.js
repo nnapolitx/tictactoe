@@ -293,5 +293,5 @@ current bugs/problems
 To dos
 -begin creating AI by having it pick random available squares from the gameboard Object
 -give the AI some knowledge with own logic
--finally, have the AI become impossible with minmax() theorem
+-finally, have the AI become impossible with minmax()
 */
