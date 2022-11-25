@@ -165,7 +165,11 @@ const drawBoard = (() => {
         }
         let move = spaces[Math.floor(Math.random()*spaces.length)]
         console.log(move)
-        
+        const selectedSpace = document.querySelector(`[data="${move}"]`)
+        gameboard.board.splice(move, 1, 'o')
+        selectedSpace.textContent = 'o'
+        playerTwo.move(Number(move))
+        gameFlow.checkWinner(playerTwo.board, playerTwo)
     }
 
     function resetGame() {
