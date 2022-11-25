@@ -147,7 +147,6 @@ const drawBoard = (() => {
             selectedSpace.textContent = 'x'
             playerOne.move(Number(index))
             gameFlow.checkWinner(playerOne.board, playerOne)
-            //call function here for computer's turn, add the turn to the gameboard.board object
             if (comp.active() === true) {
                 computerMove()
             }
