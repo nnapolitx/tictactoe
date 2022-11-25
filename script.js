@@ -95,8 +95,27 @@ const Player = (x) => {
     return {getName, resetPlayerBoard, board, move}
 }
 
+const Computer = () =>{
+    const active = () => {
+        return gameInput.getComputerStatus()
+    }
+
+    const board = []
+
+    const resetComputerBoard = ()=>{
+        board.length=0
+    }
+
+    const move = (index) => {
+        board.push(index)
+    }
+
+    return {active, resetComputerBoard, board, move}
+}
+
 const playerOne = Player(1)
 const playerTwo = Player(2)
+const comp = Computer()
 
 const gameboard = {
     'board':
