@@ -56,6 +56,10 @@ const gameInput = (()=>{
         }
         
         compCheck = true
+        const playerOneName = document.querySelector('.p1-name')
+        const playerTwoName = document.querySelector('.p2-name')
+        playerOneName.textContent = newPlayer1.value
+        playerTwoName.textContent = 'Computer'
     }
 
     function getComputerStatus (){
@@ -153,6 +157,17 @@ const drawBoard = (() => {
             playerTwo.move(Number(index))
             gameFlow.checkWinner(playerTwo.board, playerTwo)
         }
+    }
+
+    const winCombos = {
+        a: [0, 1, 2],
+        b: [3, 4, 5],
+        c: [6, 7, 8],
+        d: [0, 4, 8],
+        e: [2, 4, 6],
+        f: [0, 3, 6],
+        g: [1, 4, 7],
+        h: [2, 5, 8]
     }
 
     //Idea here is to push the computer's move to the player2 board in order to reuse all of the win code
